@@ -42,7 +42,7 @@ public class KmlUtil {
 	 * @param kml
 	 * @param fileName
 	 * @throws FileNotFoundException
-	 * @since DOCME add inception version number
+	 * @since 0.1.0
 	 */
 	public static void writeKml(Kml kml, String fileName) throws IOException {
 		FileOutputStream outputStream = new FileOutputStream(fileName);

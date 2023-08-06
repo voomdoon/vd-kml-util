@@ -68,14 +68,14 @@ class KmlUtilTest {
 	 *
 	 * @author André Schulz
 	 *
-	 * @since DOCME add inception version number
+	 * @since 0.1.0
 	 */
 	static class WriteKmlTest extends LoggingCheckingTestBase {
 
 		/**
 		 * DOCME add JavaDoc for method test
 		 * 
-		 * @since DOCME add inception version number
+		 * @since 0.1.0
 		 */
 		@Test
 		void test() throws Exception {
