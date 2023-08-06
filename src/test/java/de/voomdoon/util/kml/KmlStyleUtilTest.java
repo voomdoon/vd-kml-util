@@ -41,7 +41,7 @@ class KmlStyleUtilTest {
 			Style style = new Style();
 			style.setId("test");
 
-			KmlStyleUtil.setStyle(placemark, style, document);
+			KmlStyleUtil.setStyleUrl(placemark, style, document);
 
 			assertThat(document.getStyleSelector()).hasSize(1);
 		}
@@ -60,7 +60,7 @@ class KmlStyleUtilTest {
 			Style style = new Style();
 			style.setId("test");
 
-			KmlStyleUtil.setStyle(placemark, style, document);
+			KmlStyleUtil.setStyleUrl(placemark, style, document);
 
 			assertThat(placemark.getStyleUrl()).isEqualTo("#test");
 		}
@@ -80,8 +80,8 @@ class KmlStyleUtilTest {
 			Style style = new Style();
 			style.setId("test");
 
-			KmlStyleUtil.setStyle(placemark1, style, document);
-			KmlStyleUtil.setStyle(placemark2, style, document);
+			KmlStyleUtil.setStyleUrl(placemark1, style, document);
+			KmlStyleUtil.setStyleUrl(placemark2, style, document);
 
 			assertThat(document.getStyleSelector()).hasSize(1);
 		}

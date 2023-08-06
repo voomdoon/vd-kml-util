@@ -15,6 +15,7 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class KmlStyleUtil {
+
 	/**
 	 * DOCME add JavaDoc for method setStyle
 	 * 
@@ -23,7 +24,7 @@ public class KmlStyleUtil {
 	 * @param document
 	 * @since 0.1.0
 	 */
-	public static void setStyle(Placemark placemark, Style style, Document document) {
+	public static void setStyleUrl(Placemark placemark, Style style, Document document) {
 		add(document, style);
 		placemark.setStyleUrl(getUrl(style));
 	}
