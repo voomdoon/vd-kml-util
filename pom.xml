@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.voomdoon.util</groupId>
+		<artifactId>vd-util-parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>de.voomdoon.util</groupId>
+	<artifactId>vd-kml-util</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+
+	<dependencies>
+		<!-- + + + + + + + + + + compile dependencies + + + + + + + + + + -->
+		<!-- + + + + + external compile dependencies + + + + + -->
+		<dependency>
+			<groupId>uk.m0nom</groupId>
+			<artifactId>JavaAPIforKml</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.28</version>
+		</dependency>
+		<!-- - - - - - external compile dependencies - - - - - -->
+		<!-- - - - - - - - - - - compile dependencies - - - - - - - - - - -->
+
+		<!-- + + + + + + + + + + test dependencies + + + + + + + + + + -->
+		<!-- + + + + + internal voomdoon test dependencies + + + + + -->
+		<dependency>
+			<groupId>de.voomdoon.testing</groupId>
+			<artifactId>vd-logging-test-util</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- - - - - - internal voomdoon test dependencies - - - - - -->
+
+		<!-- + + + + + external test dependencies + + + + + -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.24.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.9.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- - - - - - external test dependencies - - - - - -->
+		<!-- - - - - - - - - - - test dependencies - - - - - - - - - - -->
+	</dependencies>
+</project>
