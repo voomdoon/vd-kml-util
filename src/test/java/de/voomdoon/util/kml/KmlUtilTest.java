@@ -3,6 +3,7 @@ package de.voomdoon.util.kml;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,8 +34,6 @@ class KmlUtilTest {
 	static class ReadKmlTest extends LoggingCheckingTestBase {
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @throws IOException
 		 * 
 		 * @since 0.1.0
@@ -52,8 +51,6 @@ class KmlUtilTest {
 		}
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @throws IOException
 		 * 
 		 * @since 0.1.0
@@ -63,6 +60,33 @@ class KmlUtilTest {
 			logTestStart();
 
 			assertThrows(FileNotFoundException.class, () -> KmlUtil.readKml("test.kml"));
+		}
+	}
+
+	/**
+	 * DOCME add JavaDoc for KmlUtilTest
+	 *
+	 * @author André Schulz
+	 *
+	 * @since DOCME add inception version number
+	 */
+	static class WriteKmlTest extends LoggingCheckingTestBase {
+
+		/**
+		 * DOCME add JavaDoc for method test
+		 * 
+		 * @since DOCME add inception version number
+		 */
+		@Test
+		void test() throws Exception {
+			logTestStart();
+
+			Kml kml = new Kml();
+
+			String outputFileName = getTempDirectory() + "/file.kml";
+			KmlUtil.writeKml(kml, outputFileName);
+
+			assertThat(new File(outputFileName)).isFile();
 		}
 	}
 }
