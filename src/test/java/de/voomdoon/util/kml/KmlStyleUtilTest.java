@@ -2,6 +2,7 @@ package de.voomdoon.util.kml;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import de.micromata.opengis.kml.v_2_2_0.Document;
@@ -25,7 +26,8 @@ class KmlStyleUtilTest {
 	 *
 	 * @since 0.1.0
 	 */
-	static class SetStyleUrlTest extends LoggingCheckingTestBase {
+	@Nested
+	class SetStyleUrlTest extends LoggingCheckingTestBase {
 
 		/**
 		 * DOCME add JavaDoc for method test

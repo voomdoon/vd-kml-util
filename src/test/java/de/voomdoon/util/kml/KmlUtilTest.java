@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
@@ -31,7 +32,8 @@ class KmlUtilTest {
 	 *
 	 * @since 0.1.0
 	 */
-	static class ReadKmlTest extends LoggingCheckingTestBase {
+	@Nested
+	class ReadKmlTest extends LoggingCheckingTestBase {
 
 		/**
 		 * @throws IOException
@@ -70,7 +72,8 @@ class KmlUtilTest {
 	 *
 	 * @since 0.1.0
 	 */
-	static class WriteKmlTest extends LoggingCheckingTestBase {
+	@Nested
+	class WriteKmlTest extends LoggingCheckingTestBase {
 
 		/**
 		 * DOCME add JavaDoc for method test
