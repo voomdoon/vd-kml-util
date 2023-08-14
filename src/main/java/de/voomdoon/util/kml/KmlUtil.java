@@ -41,17 +41,29 @@ public class KmlUtil {
 	 * 
 	 * @param kml
 	 * @param fileName
-	 * @throws FileNotFoundException
+	 * @throws IOException
 	 * @since 0.1.0
 	 */
 	public static void writeKml(Kml kml, String fileName) throws IOException {
-		FileOutputStream outputStream = new FileOutputStream(fileName);
-		kml.marshal(outputStream);
+		try (FileOutputStream outputStream = new FileOutputStream(fileName)) {
+			marshal(kml, outputStream);
+		}
+	}
 
-		try {
-			outputStream.close();
-		} catch (IOException e) {
-			throw new IOException("Failed to close output stream: " + e.getMessage(), e);
+	/**
+	 * DOCME add JavaDoc for method marshal
+	 * 
+	 * @param kml
+	 * @param outputStream
+	 * @throws IOException
+	 * @since 0.1.0
+	 */
+	private static void marshal(Kml kml, FileOutputStream outputStream) throws IOException {
+		// marshal is caching and printing any JAXBException
+		boolean success = kml.marshal(outputStream);
+
+		if (!success) {
+			throw new IOException("Failed to write KML!");
 		}
 	}
 }
