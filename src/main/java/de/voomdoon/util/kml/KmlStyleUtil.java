@@ -40,7 +40,11 @@ public class KmlStyleUtil {
 		boolean found = false;
 
 		for (StyleSelector ss : document.getStyleSelector()) {
-			if (ss.equals(style)) {
+			if (ss.getId().equals(style.getId())) {
+				if (!ss.equals(style)) {
+					throw new IllegalArgumentException("Inconsistent Styles with id " + style.getId() + "!");
+				}
+
 				found = true;
 			}
 		}

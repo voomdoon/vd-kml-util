@@ -1,11 +1,13 @@
 package de.voomdoon.util.kml;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import de.micromata.opengis.kml.v_2_2_0.Document;
+import de.micromata.opengis.kml.v_2_2_0.LineStyle;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Style;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
@@ -28,6 +30,32 @@ class KmlStyleUtilTest {
 	 */
 	@Nested
 	class SetStyleUrlTest extends LoggingCheckingTestBase {
+
+		/**
+		 * DOCME add JavaDoc for method test_error_equalIdButDifferent
+		 * 
+		 * @since DOCME add inception version number
+		 */
+		@Test
+		void test_error_equalIdButDifferent_lineStyle_with() throws Exception {
+			logTestStart();
+
+			Document document = new Document();
+
+			Style style1 = new Style();
+			style1.setLineStyle(new LineStyle().withWidth(1));
+			style1.setId("test");
+
+			Style style2 = new Style();
+			style2.setLineStyle(new LineStyle().withWidth(2));
+			style2.setId("test");
+
+			KmlStyleUtil.setStyleUrl(new Placemark(), style1, document);
+
+			Placemark placemark = new Placemark();
+
+			assertThrows(IllegalArgumentException.class, () -> KmlStyleUtil.setStyleUrl(placemark, style2, document));
+		}
 
 		/**
 		 * DOCME add JavaDoc for method test
@@ -73,7 +101,7 @@ class KmlStyleUtilTest {
 		 * @since 0.1.0
 		 */
 		@Test
-		void test_Placemark2_DocumentStyleSelectorSet() throws Exception {
+		void test_Placemark2_Style1_DocumentStyleSelector1set() throws Exception {
 			logTestStart();
 
 			Document document = new Document();
@@ -86,6 +114,32 @@ class KmlStyleUtilTest {
 			KmlStyleUtil.setStyleUrl(placemark2, style, document);
 
 			assertThat(document.getStyleSelector()).hasSize(1);
+		}
+
+		/**
+		 * DOCME add JavaDoc for method test
+		 * 
+		 * @since 0.1.0
+		 */
+		@Test
+		void test_Placemark2_Style2_DocumentStyleSelector2set() throws Exception {
+			logTestStart();
+
+			Document document = new Document();
+
+			Placemark placemark1 = new Placemark();
+			Style style1 = new Style();
+			style1.setId("test1");
+
+			KmlStyleUtil.setStyleUrl(placemark1, style1, document);
+
+			Placemark placemark2 = new Placemark();
+			Style style2 = new Style();
+			style2.setId("test2");
+
+			KmlStyleUtil.setStyleUrl(placemark2, style2, document);
+
+			assertThat(document.getStyleSelector()).hasSize(2);
 		}
 	}
 }
