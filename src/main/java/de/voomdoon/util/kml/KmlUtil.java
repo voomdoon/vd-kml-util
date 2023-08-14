@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 import lombok.experimental.UtilityClass;
@@ -17,6 +18,50 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class KmlUtil {
+
+	/**
+	 * DOCME add JavaDoc for KmlUtil
+	 *
+	 * @author André Schulz
+	 *
+	 * @since DOCME add inception version number
+	 */
+	private static class OutputStreamWrapper extends OutputStream {
+
+		/**
+		 * @since DOCME add inception version number
+		 */
+		private IOException error;
+
+		/**
+		 * @since DOCME add inception version number
+		 */
+		private OutputStream wrapped;
+
+		/**
+		 * DOCME add JavaDoc for constructor OutputStreamWrapper
+		 * 
+		 * @param wrapped
+		 * @since DOCME add inception version number
+		 */
+		public OutputStreamWrapper(OutputStream wrapped) {
+			super();
+			this.wrapped = wrapped;
+		}
+
+		/**
+		 * @since DOCME add inception version number
+		 */
+		@Override
+		public void write(int b) throws IOException {
+			try {
+				wrapped.write(b);
+			} catch (IOException e) {
+				error = e;
+				throw e;
+			}
+		}
+	}
 
 	/**
 	 * DOCME add JavaDoc for method readKml
@@ -58,11 +103,18 @@ public class KmlUtil {
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
-	private static void marshal(Kml kml, FileOutputStream outputStream) throws IOException {
+	private static void marshal(Kml kml, OutputStream outputStream) throws IOException {
+		OutputStreamWrapper wrapper = new OutputStreamWrapper(outputStream);
+
 		// marshal is caching and printing any JAXBException
-		boolean success = kml.marshal(outputStream);
+		// => use wrapper for OutputStream to catch any IOException
+		boolean success = kml.marshal(wrapper);
 
 		if (!success) {
+			if (wrapper.error != null) {
+				throw wrapper.error;
+			}
+
 			throw new IOException("Failed to write KML!");
 		}
 	}

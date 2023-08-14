@@ -100,7 +100,7 @@ class KmlUtilTest {
 		 * @since DOCME add inception version number
 		 */
 		@Test
-		void test_IOException() throws Exception {
+		void test_IOException_fileLocked_messageContainsReason() throws Exception {
 			logTestStart();
 
 			Kml kml = new Kml();
@@ -111,7 +111,10 @@ class KmlUtilTest {
 
 			try (FileChannel channel = FileChannel.open(Path.of(outputFileName), StandardOpenOption.APPEND)) {
 				channel.lock();
-				assertThrows(IOException.class, () -> KmlUtil.writeKml(kml, outputFileName));
+				IOException actual = assertThrows(IOException.class, () -> KmlUtil.writeKml(kml, outputFileName));
+
+				assertThat(actual).hasMessageContaining(
+						"The process cannot access the file because another process has locked a portion of the file");
 			}
 		}
 	}
