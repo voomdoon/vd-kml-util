@@ -35,7 +35,7 @@ class KmlStyleUtilTest {
 		 * @since 0.1.0
 		 */
 		@Test
-		void test_Placemark1_Document_styleSelector() throws Exception {
+		void test_Placemark1_DocumentStyleSelectorSet() throws Exception {
 			logTestStart();
 
 			Document document = new Document();
@@ -54,7 +54,7 @@ class KmlStyleUtilTest {
 		 * @since 0.1.0
 		 */
 		@Test
-		void test_Placemark1_Placemark_styleUrl() throws Exception {
+		void test_Placemark1_PlacemarkStyleUrlSet() throws Exception {
 			logTestStart();
 
 			Document document = new Document();
@@ -73,7 +73,7 @@ class KmlStyleUtilTest {
 		 * @since 0.1.0
 		 */
 		@Test
-		void test_Placemark2_Document_styleSelector() throws Exception {
+		void test_Placemark2_DocumentStyleSelectorSet() throws Exception {
 			logTestStart();
 
 			Document document = new Document();
