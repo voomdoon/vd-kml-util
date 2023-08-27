@@ -76,6 +76,8 @@ public class KmlUtil {
 
 		if (!file.exists()) {
 			throw new FileNotFoundException("Failed to read KML: File not found: " + fileName);
+		} else if (file.isDirectory()) {
+			throw new IllegalArgumentException("Failed to read KML: Cannot read directory: " + fileName);
 		}
 
 		return Kml.unmarshal(file);

@@ -38,12 +38,27 @@ class KmlUtilTest {
 	class ReadKmlTest extends LoggingCheckingTestBase {
 
 		/**
+		 * @since DOCME add inception version number
+		 */
+		@Test
+		void test_directory_error() throws Exception {
+			logTestStart();
+
+			String directory = getTempDirectory().toString();
+
+			IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+					() -> KmlUtil.readKml(directory));
+
+			assertThat(exception).hasMessageContaining("directory");
+		}
+
+		/**
 		 * @throws IOException
 		 * 
 		 * @since 0.1.0
 		 */
 		@Test
-		void test_File() throws IOException {
+		void test_file() throws IOException {
 			logTestStart();
 
 			Path path = Paths.get(getTempDirectory().toString(), "input.kml");
@@ -60,7 +75,7 @@ class KmlUtilTest {
 		 * @since 0.1.0
 		 */
 		@Test
-		void test_File_notFound() throws IOException {
+		void test_file_notFound() throws IOException {
 			logTestStart();
 
 			assertThrows(FileNotFoundException.class, () -> KmlUtil.readKml("test.kml"));
