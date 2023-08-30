@@ -80,7 +80,14 @@ public class KmlUtil {
 			throw new IllegalArgumentException("Failed to read KML: Cannot read directory: " + fileName);
 		}
 
-		return Kml.unmarshal(file);
+		Kml result = Kml.unmarshal(file);
+
+		if (result == null) {
+			// TESTME FEATURE apply same monitoring as during writing (detect SAXParseException)
+			throw new IOException("Unexpected error during unmarshalling KML!");
+		}
+
+		return result;
 	}
 
 	/**
@@ -106,6 +113,8 @@ public class KmlUtil {
 	 * @since 0.1.0
 	 */
 	private static void marshal(Kml kml, OutputStream outputStream) throws IOException {
+		// OPTIMIZE speed: maybe write in cache and write in file at once (if writing to network)
+
 		OutputStreamWrapper wrapper = new OutputStreamWrapper(outputStream);
 
 		// marshal is caching and printing any JAXBException
