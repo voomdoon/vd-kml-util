@@ -24,17 +24,17 @@ public class KmlUtil {
 	 *
 	 * @author André Schulz
 	 *
-	 * @since DOCME add inception version number
+	 * @since 0.1.0
 	 */
 	private static class OutputStreamWrapper extends OutputStream {
 
 		/**
-		 * @since DOCME add inception version number
+		 * @since 0.1.0
 		 */
 		private IOException error;
 
 		/**
-		 * @since DOCME add inception version number
+		 * @since 0.1.0
 		 */
 		private OutputStream wrapped;
 
@@ -42,7 +42,7 @@ public class KmlUtil {
 		 * DOCME add JavaDoc for constructor OutputStreamWrapper
 		 * 
 		 * @param wrapped
-		 * @since DOCME add inception version number
+		 * @since 0.1.0
 		 */
 		public OutputStreamWrapper(OutputStream wrapped) {
 			super();
@@ -50,7 +50,7 @@ public class KmlUtil {
 		}
 
 		/**
-		 * @since DOCME add inception version number
+		 * @since 0.1.0
 		 */
 		@Override
 		public void write(int b) throws IOException {

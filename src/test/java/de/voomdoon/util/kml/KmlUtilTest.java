@@ -38,7 +38,7 @@ class KmlUtilTest {
 	class ReadKmlTest extends LoggingCheckingTestBase {
 
 		/**
-		 * @since DOCME add inception version number
+		 * @since 0.1.0
 		 */
 		@Test
 		void test_directory_error() throws Exception {
@@ -112,7 +112,7 @@ class KmlUtilTest {
 		/**
 		 * DOCME add JavaDoc for method test_IOException
 		 * 
-		 * @since DOCME add inception version number
+		 * @since 0.1.0
 		 */
 		@Test
 		void test_IOException_fileLocked_messageContainsReason() throws Exception {
