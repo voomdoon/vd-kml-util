@@ -18,12 +18,32 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class LineStringCleanerTest extends LoggingCheckingTestBase {
 
 	/**
-	 * DOCME add JavaDoc for method testClean_default
-	 * 
 	 * @since 0.1.0
 	 */
 	@Test
-	void testClean_default_removedEqualCoordinates() throws Exception {
+	void testClean_default_doesNotRemoveCoordinateWithSlightlyDifferentAltitude() throws Exception {
+		logTestStart();
+
+		LineString lineString = new LineString();
+		lineString.addToCoordinates(1, 1, 1);
+		lineString.addToCoordinates(2, 2, 2);
+		lineString.addToCoordinates(2, 2, 2.1);
+		lineString.addToCoordinates(3, 3, 3);
+
+		new LineStringCleaner().clean(lineString);
+
+		assertThat(lineString).extracting(LineString::getCoordinates).asList().containsExactly(//
+				new Coordinate(1, 1, 1), //
+				new Coordinate(2, 2, 2), //
+				new Coordinate(2, 2, 2.1), //
+				new Coordinate(3, 3, 3));
+	}
+
+	/**
+	 * @since 0.1.0
+	 */
+	@Test
+	void testClean_default_removesEqualCoordinates() throws Exception {
 		logTestStart();
 
 		LineString lineString = new LineString();
@@ -39,5 +59,4 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 				new Coordinate(2, 2, 2), //
 				new Coordinate(3, 3, 3));
 	}
-
 }
