@@ -35,6 +35,7 @@
 			<groupId>de.voomdoon.testing</groupId>
 			<artifactId>vd-logging-test-util</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- - - - - - internal voomdoon test dependencies - - - - - -->
 
