@@ -73,6 +73,52 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 	 * @since 0.1.0
 	 */
 	@Test
+	void testClean_default_doesNotRemoveCoordinateWithDifferentLatitude() throws Exception {
+		logTestStart();
+
+		LineString lineString = new LineString();
+		lineString.addToCoordinates(1, 1, 1);
+		lineString.addToCoordinates(2, 2, 2);
+		lineString.addToCoordinates(2, 2.1, 2);
+		lineString.addToCoordinates(3, 3, 3);
+
+		new LineStringCleaner().clean(lineString);
+
+		assertThat(lineString).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+				.containsExactly(//
+						new Coordinate(1, 1, 1), //
+						new Coordinate(2, 2, 2), //
+						new Coordinate(2, 2.1, 2), //
+						new Coordinate(3, 3, 3));
+	}
+
+	/**
+	 * @since 0.1.0
+	 */
+	@Test
+	void testClean_default_doesNotRemoveCoordinateWithDifferentLongitude() throws Exception {
+		logTestStart();
+
+		LineString lineString = new LineString();
+		lineString.addToCoordinates(1, 1, 1);
+		lineString.addToCoordinates(2, 2, 2);
+		lineString.addToCoordinates(2.1, 2, 2);
+		lineString.addToCoordinates(3, 3, 3);
+
+		new LineStringCleaner().clean(lineString);
+
+		assertThat(lineString).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+				.containsExactly(//
+						new Coordinate(1, 1, 1), //
+						new Coordinate(2, 2, 2), //
+						new Coordinate(2.1, 2, 2), //
+						new Coordinate(3, 3, 3));
+	}
+
+	/**
+	 * @since 0.1.0
+	 */
+	@Test
 	void testClean_default_doesNotRemoveCoordinateWithSlightlyDifferentAltitude() throws Exception {
 		logTestStart();
 
