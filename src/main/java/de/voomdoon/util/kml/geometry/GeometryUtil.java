@@ -1,4 +1,4 @@
-package de.voomdoon.util.kml;
+package de.voomdoon.util.kml.geometry;
 
 import de.micromata.opengis.kml.v_2_2_0.Geometry;
 import de.micromata.opengis.kml.v_2_2_0.LineString;

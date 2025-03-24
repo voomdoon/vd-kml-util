@@ -1,4 +1,4 @@
-package de.voomdoon.util.kml;
+package de.voomdoon.util.kml.geometry;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
