@@ -2,6 +2,7 @@ package de.voomdoon.util.kml;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -47,8 +48,8 @@ class GeometryUtilTest {
 
 			LineString actual = GeometryUtil.concatenateLineStrings(multiGeometry);
 
-			assertThat(actual).extracting(LineString::getCoordinates).asList().containsExactly(new Coordinate(1.1, 1.2),
-					new Coordinate(2.1, 2.2));
+			assertThat(actual).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+					.containsExactly(new Coordinate(1.1, 1.2), new Coordinate(2.1, 2.2));
 		}
 
 		/**
@@ -74,8 +75,9 @@ class GeometryUtilTest {
 
 			LineString actual = GeometryUtil.concatenateLineStrings(multiGeometry);
 
-			assertThat(actual).extracting(LineString::getCoordinates).asList().containsExactly(new Coordinate(1.1, 1.2),
-					new Coordinate(2.1, 2.2), new Coordinate(3.1, 3.2), new Coordinate(4.1, 4.2));
+			assertThat(actual).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+					.containsExactly(new Coordinate(1.1, 1.2), new Coordinate(2.1, 2.2), new Coordinate(3.1, 3.2),
+							new Coordinate(4.1, 4.2));
 		}
 	}
 }
