@@ -32,7 +32,7 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 		lineString.addToCoordinates(3, 3, 3);
 
 		LineStringCleaner cleaner = new LineStringCleaner();
-		cleaner.setAltitudeThreshold(1);
+		cleaner.setAltitudeThreshold(.1);
 
 		cleaner.clean(lineString);
 
@@ -58,7 +58,7 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 		lineString.addToCoordinates(3, 3, 3);
 
 		LineStringCleaner cleaner = new LineStringCleaner();
-		cleaner.setAltitudeThreshold(1);
+		cleaner.setAltitudeThreshold(.1);
 
 		cleaner.clean(lineString);
 

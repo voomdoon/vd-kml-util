@@ -20,6 +20,11 @@ public class LineStringCleaner {
 	private double altitudeThreshold;
 
 	/**
+	 * @since 0.1.0
+	 */
+	private double epsilon = 1E-9;
+
+	/**
 	 * DOCME add JavaDoc for method removeDuplicateCoorinates
 	 * 
 	 * @param lineString
@@ -64,7 +69,7 @@ public class LineStringCleaner {
 		if (altitudeThreshold > 0 //
 				&& curr.getLongitude() == last.getLongitude()//
 				&& curr.getLatitude() == last.getLatitude()) {
-			return Math.abs(curr.getAltitude() - last.getAltitude()) <= altitudeThreshold;
+			return Math.abs(curr.getAltitude() - last.getAltitude()) <= altitudeThreshold + epsilon;
 		}
 
 		return curr.equals(last);
