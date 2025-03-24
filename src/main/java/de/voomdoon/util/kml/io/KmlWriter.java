@@ -119,7 +119,6 @@ public class KmlWriter {
 				body = string;
 			}
 
-			// XXX will not work if the namespace is distributed across two buffers? (or done by temp?)
 			body = body.replace("xmlns:kml=\"http://www.opengis.net/kml/2.2\"",
 					"xmlns=\"http://www.opengis.net/kml/2.2\"");
 
