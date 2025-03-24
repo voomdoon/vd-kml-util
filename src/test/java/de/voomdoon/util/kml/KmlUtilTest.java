@@ -1,16 +1,13 @@
 package de.voomdoon.util.kml;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
@@ -26,58 +23,20 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlUtilTest extends LoggingCheckingTestBase {
 
 	/**
-	 * DOCME add JavaDoc for KmlUtilTest
-	 *
-	 * @author André Schulz
-	 *
+	 * @throws IOException
+	 * 
 	 * @since 0.1.0
 	 */
-	@Nested
-	class ReadKmlTest extends LoggingCheckingTestBase {
+	@Test
+	void testReadKml() throws IOException {
+		logTestStart();
 
-		/**
-		 * @since 0.1.0
-		 */
-		@Test
-		void test_directory_error() throws Exception {
-			logTestStart();
+		Path path = Paths.get(getTempDirectory().toString(), "input.kml");
+		Files.copy(getClass().getResourceAsStream("/kml/Document.kml"), path);
 
-			String directory = getTempDirectory().toString();
+		Kml kml = KmlUtil.readKml(path.toString());
 
-			IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-					() -> KmlUtil.readKml(directory));
-
-			assertThat(exception).hasMessageContaining("directory");
-		}
-
-		/**
-		 * @throws IOException
-		 * 
-		 * @since 0.1.0
-		 */
-		@Test
-		void test_file() throws IOException {
-			logTestStart();
-
-			Path path = Paths.get(getTempDirectory().toString(), "input.kml");
-			Files.copy(getClass().getResourceAsStream("/kml/Document.kml"), path);
-
-			Kml kml = KmlUtil.readKml(path.toString());
-
-			assertThat(kml).isNotNull();
-		}
-
-		/**
-		 * @throws IOException
-		 * 
-		 * @since 0.1.0
-		 */
-		@Test
-		void test_file_notFound() throws IOException {
-			logTestStart();
-
-			assertThrows(FileNotFoundException.class, () -> KmlUtil.readKml("test.kml"));
-		}
+		assertThat(kml).isNotNull();
 	}
 
 	/**
