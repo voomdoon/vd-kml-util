@@ -43,14 +43,6 @@ public class LineStringCleaner {
 	}
 
 	/**
-	 * @return altitudeThreshold
-	 * @since 0.1.0
-	 */
-	public double getAltitudeThreshold() {
-		return altitudeThreshold;
-	}
-
-	/**
 	 * @param altitudeThreshold
 	 *            altitudeThreshold
 	 * @since 0.1.0
@@ -68,7 +60,9 @@ public class LineStringCleaner {
 	 * @since 0.1.0
 	 */
 	private boolean isEqual(Coordinate last, Coordinate curr) {
-		if (altitudeThreshold > 0 && curr.getLongitude() == last.getLongitude()
+		// TESTME
+		if (altitudeThreshold > 0 //
+				&& curr.getLongitude() == last.getLongitude()//
 				&& curr.getLatitude() == last.getLatitude()) {
 			return Math.abs(curr.getAltitude() - last.getAltitude()) <= altitudeThreshold;
 		}
