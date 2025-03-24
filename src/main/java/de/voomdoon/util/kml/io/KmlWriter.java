@@ -23,17 +23,17 @@ public class KmlWriter {
 	 *
 	 * @since 0.1.0
 	 */
-	private class MyNormalWriter extends Writer {
+	private class NormalWriter extends Writer {
 
 		/**
 		 * @since 0.1.0
 		 */
-		private IOException error;
+		protected FileWriter fileWriter;
 
 		/**
 		 * @since 0.1.0
 		 */
-		private FileWriter fileWriter;
+		IOException error;
 
 		/**
 		 * DOCME add JavaDoc for constructor MyWriter
@@ -41,7 +41,7 @@ public class KmlWriter {
 		 * @param fileWriter
 		 * @since 0.1.0
 		 */
-		public MyNormalWriter(FileWriter fileWriter) {
+		public NormalWriter(FileWriter fileWriter) {
 			this.fileWriter = fileWriter;
 		}
 
@@ -83,17 +83,7 @@ public class KmlWriter {
 	 *
 	 * @since 0.1.0
 	 */
-	private class MyWriter extends Writer {
-
-		/**
-		 * @since 0.1.0
-		 */
-		private IOException error;
-
-		/**
-		 * @since 0.1.0
-		 */
-		private FileWriter fileWriter;
+	private class PlainWriter extends NormalWriter {
 
 		/**
 		 * @since 0.1.0
@@ -106,29 +96,8 @@ public class KmlWriter {
 		 * @param fileWriter
 		 * @since 0.1.0
 		 */
-		public MyWriter(FileWriter fileWriter) {
-			this.fileWriter = fileWriter;
-		}
-
-		/**
-		 * @since 0.1.0
-		 */
-		@Override
-		public void close() throws IOException {
-			fileWriter.close();
-		}
-
-		/**
-		 * @since 0.1.0
-		 */
-		@Override
-		public void flush() throws IOException {
-			try {
-				fileWriter.flush();
-			} catch (IOException e) {
-				error = e;
-				throw e;
-			}
+		public PlainWriter(FileWriter fileWriter) {
+			super(fileWriter);
 		}
 
 		/**
@@ -167,6 +136,9 @@ public class KmlWriter {
 		}
 	}
 
+	/**
+	 * @since 0.1.0
+	 */
 	private boolean plainXml;
 
 	/**
@@ -190,10 +162,23 @@ public class KmlWriter {
 	 * @since 0.1.0
 	 */
 	public void write(Kml kml, String fileName) throws IOException {
+		try (NormalWriter writer = getWriter(new FileWriter(fileName))) {
+			marshal(kml, writer);
+		}
+	}
+
+	/**
+	 * DOCME add JavaDoc for method getWriter
+	 * 
+	 * @param fileWriter
+	 * @return
+	 * @since 0.1.0
+	 */
+	private NormalWriter getWriter(FileWriter fileWriter) {
 		if (plainXml) {
-			writePlainXml(kml, fileName);
+			return new PlainWriter(fileWriter);
 		} else {
-			marshal(kml, fileName);
+			return new NormalWriter(fileWriter);
 		}
 	}
 
@@ -205,22 +190,12 @@ public class KmlWriter {
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
-	private void marshal(Kml kml, String fileName) throws IOException {
-		FileWriter fileWriter = new FileWriter(fileName);
-
-		MyNormalWriter writer = new MyNormalWriter(fileWriter);
-
-		boolean success = kml.marshal(writer);
-
-		writer.close();
-
-		if (!success) {
-			if (writer.error != null) {
-				throw writer.error;
-			}
-
-			throw new IOException("Failed to write KML!");
+	private void handleIOException(NormalWriter writer) throws IOException {
+		if (writer.error != null) {
+			throw writer.error;
 		}
+
+		throw new IOException("Failed to write KML!");
 	}
 
 	/**
@@ -231,23 +206,11 @@ public class KmlWriter {
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
-	private void writePlainXml(Kml kml, String fileName) throws IOException {
-		FileWriter fileWriter = new FileWriter(fileName);
-
-		// FIXME file is truncated sometimes (big file?)
-		MyWriter writer = new MyWriter(fileWriter);
-
-		// FIXME retry on IOException: An unexpected network error occurred
+	private void marshal(Kml kml, NormalWriter writer) throws IOException {
 		boolean success = kml.marshal(writer);
 
-		writer.close();
-
 		if (!success) {
-			if (writer.error != null) {
-				throw writer.error;
-			}
-
-			throw new IOException("Failed to write KML!");
+			handleIOException(writer);
 		}
 	}
 }
