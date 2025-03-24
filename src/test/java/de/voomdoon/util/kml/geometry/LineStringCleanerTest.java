@@ -2,6 +2,7 @@ package de.voomdoon.util.kml.geometry;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
 
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
@@ -35,11 +36,12 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 
 		cleaner.clean(lineString);
 
-		assertThat(lineString).extracting(LineString::getCoordinates).asList().containsExactly(//
-				new Coordinate(1, 1, 1), //
-				new Coordinate(2, 2, 2), //
-				new Coordinate(2, 2, 3.1), //
-				new Coordinate(3, 3, 3));
+		assertThat(lineString).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+				.containsExactly(//
+						new Coordinate(1, 1, 1), //
+						new Coordinate(2, 2, 2), //
+						new Coordinate(2, 2, 3.1), //
+						new Coordinate(3, 3, 3));
 	}
 
 	/**
@@ -60,10 +62,11 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 
 		cleaner.clean(lineString);
 
-		assertThat(lineString).extracting(LineString::getCoordinates).asList().containsExactly(//
-				new Coordinate(1, 1, 1), //
-				new Coordinate(2, 2, 2), //
-				new Coordinate(3, 3, 3));
+		assertThat(lineString).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+				.containsExactly(//
+						new Coordinate(1, 1, 1), //
+						new Coordinate(2, 2, 2), //
+						new Coordinate(3, 3, 3));
 	}
 
 	/**
@@ -81,11 +84,12 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 
 		new LineStringCleaner().clean(lineString);
 
-		assertThat(lineString).extracting(LineString::getCoordinates).asList().containsExactly(//
-				new Coordinate(1, 1, 1), //
-				new Coordinate(2, 2, 2), //
-				new Coordinate(2, 2, 2.1), //
-				new Coordinate(3, 3, 3));
+		assertThat(lineString).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+				.containsExactly(//
+						new Coordinate(1, 1, 1), //
+						new Coordinate(2, 2, 2), //
+						new Coordinate(2, 2, 2.1), //
+						new Coordinate(3, 3, 3));
 	}
 
 	/**
@@ -103,9 +107,10 @@ class LineStringCleanerTest extends LoggingCheckingTestBase {
 
 		new LineStringCleaner().clean(lineString);
 
-		assertThat(lineString).extracting(LineString::getCoordinates).asList().containsExactly(//
-				new Coordinate(1, 1, 1), //
-				new Coordinate(2, 2, 2), //
-				new Coordinate(3, 3, 3));
+		assertThat(lineString).extracting(LineString::getCoordinates).asInstanceOf(InstanceOfAssertFactories.LIST)
+				.containsExactly(//
+						new Coordinate(1, 1, 1), //
+						new Coordinate(2, 2, 2), //
+						new Coordinate(3, 3, 3));
 	}
 }
