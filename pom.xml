@@ -13,6 +13,10 @@
 	<artifactId>vd-kml-util</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 
+	<properties>
+		<junit-jupiter.version>5.12.0</junit-jupiter.version>
+	</properties>
+
 	<dependencies>
 		<!-- + + + + + + + + + + compile dependencies + + + + + + + + + + -->
 		<!-- + + + + + external compile dependencies + + + + + -->
@@ -49,7 +53,13 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.12.0</version>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${junit-jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- - - - - - external test dependencies - - - - - -->

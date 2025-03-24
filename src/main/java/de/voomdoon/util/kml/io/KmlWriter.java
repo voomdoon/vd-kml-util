@@ -1,9 +1,7 @@
 package de.voomdoon.util.kml.io;
 
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Writer;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
@@ -16,6 +14,66 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
  * @since 0.1.0
  */
 public class KmlWriter {
+
+	/**
+	 * 
+	 * DOCME add JavaDoc for KmlWriter
+	 *
+	 * @author André Schulz
+	 *
+	 * @since 0.1.0
+	 */
+	private class MyNormalWriter extends Writer {
+
+		/**
+		 * @since 0.1.0
+		 */
+		private IOException error;
+
+		/**
+		 * @since 0.1.0
+		 */
+		private FileWriter fileWriter;
+
+		/**
+		 * DOCME add JavaDoc for constructor MyWriter
+		 * 
+		 * @param fileWriter
+		 * @since 0.1.0
+		 */
+		public MyNormalWriter(FileWriter fileWriter) {
+			this.fileWriter = fileWriter;
+		}
+
+		/**
+		 * @since 0.1.0
+		 */
+		@Override
+		public void close() throws IOException {
+			fileWriter.close();
+		}
+
+		/**
+		 * @since 0.1.0
+		 */
+		@Override
+		public void flush() throws IOException {
+			try {
+				fileWriter.flush();
+			} catch (IOException e) {
+				error = e;
+				throw e;
+			}
+		}
+
+		/**
+		 * @since 0.1.0
+		 */
+		@Override
+		public void write(char[] cbuf, int off, int len) throws IOException {
+			fileWriter.write(cbuf, off, len);
+		}
+	}
 
 	/**
 	 * 
@@ -91,6 +149,7 @@ public class KmlWriter {
 				body = string;
 			}
 
+			// XXX will not work if the namespace is distributed across two buffers? (or done by temp?)
 			body = body.replace("xmlns:kml=\"http://www.opengis.net/kml/2.2\"",
 					"xmlns=\"http://www.opengis.net/kml/2.2\"");
 
@@ -108,59 +167,15 @@ public class KmlWriter {
 		}
 	}
 
-	/**
-	 * Wrapper to catch any {@link IOException} during writing.
-	 *
-	 * @author André Schulz
-	 *
-	 * @since 0.1.0
-	 */
-	private static class OutputStreamWrapper extends OutputStream {
-
-		/**
-		 * @since 0.1.0
-		 */
-		private IOException error;
-
-		/**
-		 * @since 0.1.0
-		 */
-		private OutputStream wrapped;
-
-		/**
-		 * DOCME add JavaDoc for constructor OutputStreamWrapper
-		 * 
-		 * @param wrapped
-		 * @since 0.1.0
-		 */
-		public OutputStreamWrapper(OutputStream wrapped) {
-			super();
-			this.wrapped = wrapped;
-		}
-
-		/**
-		 * @since 0.1.0
-		 */
-		@Override
-		public void write(int b) throws IOException {
-			try {
-				wrapped.write(b);
-			} catch (IOException e) {
-				error = e;
-				throw e;
-			}
-		}
-	}
-
 	private boolean plainXml;
 
 	/**
-	 * DOCME add JavaDoc for method withPlainXml
+	 * Causes writing of plain XML without namespace prefixes.
 	 * 
-	 * @return this {@link KmlWriter}
+	 * @return this {@link KmlWriterV5_refactor_renameMethod}
 	 * @since 0.1.0
 	 */
-	public KmlWriter withPlainXml() {
+	public KmlWriter disableNamespacePrefixes() {
 		plainXml = true;
 
 		return this;
@@ -178,9 +193,7 @@ public class KmlWriter {
 		if (plainXml) {
 			writePlainXml(kml, fileName);
 		} else {
-			try (FileOutputStream outputStream = new FileOutputStream(fileName)) {
-				marshal(kml, outputStream);
-			}
+			marshal(kml, fileName);
 		}
 	}
 
@@ -188,22 +201,22 @@ public class KmlWriter {
 	 * DOCME add JavaDoc for method marshal
 	 * 
 	 * @param kml
-	 * @param outputStream
+	 * @param fileName
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
-	private void marshal(Kml kml, OutputStream outputStream) throws IOException {
-		// OPTIMIZE speed: maybe write in cache and write in file at once (if writing to network)
+	private void marshal(Kml kml, String fileName) throws IOException {
+		FileWriter fileWriter = new FileWriter(fileName);
 
-		OutputStreamWrapper wrapper = new OutputStreamWrapper(outputStream);
+		MyNormalWriter writer = new MyNormalWriter(fileWriter);
 
-		// marshal is caching and printing any JAXBException
-		// => use wrapper for OutputStream to catch any IOException
-		boolean success = kml.marshal(wrapper);
+		boolean success = kml.marshal(writer);
+
+		writer.close();
 
 		if (!success) {
-			if (wrapper.error != null) {
-				throw wrapper.error;
+			if (writer.error != null) {
+				throw writer.error;
 			}
 
 			throw new IOException("Failed to write KML!");
