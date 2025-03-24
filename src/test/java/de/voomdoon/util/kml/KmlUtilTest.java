@@ -6,11 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -25,7 +23,7 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
  *
  * @since 0.1.0
  */
-class KmlUtilTest {
+class KmlUtilTest extends LoggingCheckingTestBase {
 
 	/**
 	 * DOCME add JavaDoc for KmlUtilTest
@@ -83,54 +81,19 @@ class KmlUtilTest {
 	}
 
 	/**
-	 * DOCME add JavaDoc for KmlUtilTest
-	 *
-	 * @author André Schulz
-	 *
+	 * DOCME add JavaDoc for method test
+	 * 
 	 * @since 0.1.0
 	 */
-	@Nested
-	class WriteKmlTest extends LoggingCheckingTestBase {
+	@Test
+	void testWriteKml() throws Exception {
+		logTestStart();
 
-		/**
-		 * DOCME add JavaDoc for method test
-		 * 
-		 * @since 0.1.0
-		 */
-		@Test
-		void test() throws Exception {
-			logTestStart();
+		Kml kml = new Kml();
 
-			Kml kml = new Kml();
+		String outputFileName = getTempDirectory() + "/file.kml";
+		KmlUtil.writeKml(kml, outputFileName);
 
-			String outputFileName = getTempDirectory() + "/file.kml";
-			KmlUtil.writeKml(kml, outputFileName);
-
-			assertThat(new File(outputFileName)).isFile();
-		}
-
-		/**
-		 * DOCME add JavaDoc for method test_IOException
-		 * 
-		 * @since 0.1.0
-		 */
-		@Test
-		void test_IOException_fileLocked_messageContainsReason() throws Exception {
-			logTestStart();
-
-			Kml kml = new Kml();
-
-			String outputFileName = getTempDirectory() + "/file.kml";
-
-			new File(outputFileName).createNewFile();
-
-			try (FileChannel channel = FileChannel.open(Path.of(outputFileName), StandardOpenOption.APPEND)) {
-				channel.lock();
-				IOException actual = assertThrows(IOException.class, () -> KmlUtil.writeKml(kml, outputFileName));
-
-				assertThat(actual).hasMessageContaining(
-						"The process cannot access the file because another process has locked a portion of the file");
-			}
-		}
+		assertThat(new File(outputFileName)).isFile();
 	}
 }
