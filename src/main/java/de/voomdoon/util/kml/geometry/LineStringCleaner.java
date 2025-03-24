@@ -65,10 +65,12 @@ public class LineStringCleaner {
 	 * @since 0.1.0
 	 */
 	private boolean isEqual(Coordinate last, Coordinate curr) {
-		// TESTME
+		// mutation with changed conditional boundary no covered (will be handled by calculation)
 		if (altitudeThreshold > 0 //
 				&& curr.getLongitude() == last.getLongitude()//
 				&& curr.getLatitude() == last.getLatitude()) {
+			// mutation with changed conditional boundary no covered, due to floating point precision
+			// using BigDecimal would have huge performance impact
 			return Math.abs(curr.getAltitude() - last.getAltitude()) <= altitudeThreshold + epsilon;
 		}
 
