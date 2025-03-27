@@ -1,4 +1,4 @@
-package de.voomdoon.util.kml;
+package de.voomdoon.util.kml.style;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

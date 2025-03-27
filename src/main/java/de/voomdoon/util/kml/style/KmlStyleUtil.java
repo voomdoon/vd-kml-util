@@ -1,4 +1,4 @@
-package de.voomdoon.util.kml;
+package de.voomdoon.util.kml.style;
 
 import de.micromata.opengis.kml.v_2_2_0.Document;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
