@@ -8,7 +8,7 @@ import java.io.Writer;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 
 /**
- * DOCME add JavaDoc for
+ * Writes {@link Kml} to a file.
  *
  * @author André Schulz
  *
@@ -17,9 +17,6 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
 public class KmlWriter {
 
 	/**
-	 * 
-	 * DOCME add JavaDoc for KmlWriter
-	 *
 	 * @author André Schulz
 	 *
 	 * @since 0.1.0
@@ -34,7 +31,7 @@ public class KmlWriter {
 		/**
 		 * @since 0.1.0
 		 */
-		IOException error;
+		private IOException error;
 
 		/**
 		 * DOCME add JavaDoc for constructor MyWriter
@@ -77,8 +74,7 @@ public class KmlWriter {
 	}
 
 	/**
-	 * 
-	 * DOCME add JavaDoc for KmlWriter
+	 * Writes plain XML without namespace prefixes.
 	 *
 	 * @author André Schulz
 	 *
@@ -92,8 +88,6 @@ public class KmlWriter {
 		private String temp = null;
 
 		/**
-		 * DOCME add JavaDoc for constructor MyWriter
-		 * 
 		 * @param wrapped
 		 * @since 0.1.0
 		 */
@@ -150,10 +144,10 @@ public class KmlWriter {
 	}
 
 	/**
-	 * DOCME add JavaDoc for method write
-	 * 
 	 * @param kml
+	 *            {@link Kml} to write
 	 * @param fileName
+	 *            file name to write to
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
@@ -164,10 +158,9 @@ public class KmlWriter {
 	}
 
 	/**
-	 * DOCME add JavaDoc for method getWriter
-	 * 
 	 * @param writer
-	 * @return
+	 *            {@link BufferedWriter}
+	 * @return {@link NormalWriter}
 	 * @since 0.1.0
 	 */
 	private NormalWriter getWriter(BufferedWriter writer) {
@@ -179,9 +172,10 @@ public class KmlWriter {
 	}
 
 	/**
-	 * DOCME add JavaDoc for method handleIOException
+	 * Handles {@link IOException} during writing.
 	 * 
 	 * @param writer
+	 *            {@link NormalWriter}
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
@@ -194,10 +188,10 @@ public class KmlWriter {
 	}
 
 	/**
-	 * DOCME add JavaDoc for method marshal
-	 * 
 	 * @param kml
+	 *            {@link Kml}
 	 * @param writer
+	 *            {@link NormalWriter}
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
