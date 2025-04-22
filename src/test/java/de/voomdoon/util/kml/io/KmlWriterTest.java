@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Random;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,6 +23,8 @@ import de.micromata.opengis.kml.v_2_2_0.Feature;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Point;
+import de.voomdoon.testing.file.TempFileExtension;
+import de.voomdoon.testing.file.TempOutputFile;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
@@ -42,6 +44,8 @@ class KmlWriterTest {
 	 * @since 0.1.0
 	 */
 	@Nested
+	@ExtendWith(TempFileExtension.class)
+	@ExtendWith(TempFileExtension.class)
 	class WriteTest extends LoggingCheckingTestBase {
 
 		/**
@@ -67,11 +71,6 @@ class KmlWriterTest {
 		/**
 		 * @since 0.1.0
 		 */
-		private String fileName;
-
-		/**
-		 * @since 0.1.0
-		 */
 		private Kml kml = new Kml();
 
 		/**
@@ -80,25 +79,15 @@ class KmlWriterTest {
 		private KmlWriter writer = new KmlWriter();
 
 		/**
-		 * DOCME add JavaDoc for constructor KmlWriterTest.WriteTest
-		 * 
-		 * @throws IOException
-		 * @since 0.1.0
-		 */
-		public WriteTest() throws IOException {
-			fileName = getTempDirectory() + "/file.kml";
-		}
-
-		/**
 		 * @since 0.1.0
 		 */
 		@Test
-		void test() throws Exception {
+		void test(@TempOutputFile File outputFile) throws Exception {
 			logTestStart();
 
-			writer.write(kml, fileName);
+			writer.write(kml, outputFile.toString());
 
-			assertThat(new File(fileName)).isFile();
+			assertThat(outputFile).isFile();
 		}
 
 		/**
@@ -108,7 +97,7 @@ class KmlWriterTest {
 		 */
 		@ParameterizedTest
 		@EnumSource(WriteType.class)
-		void test_closesFile(WriteType plain) throws IOException {
+		void test_closesFile(WriteType plain, @TempOutputFile File outputFile) throws IOException {
 			logTestStart();
 
 			// FEATURE test with plain
@@ -117,9 +106,9 @@ class KmlWriterTest {
 				writer.disableNamespacePrefixes();
 			}
 
-			writer.write(kml, fileName);
+			writer.write(kml, outputFile.toString());
 
-			boolean actual = new File(fileName).delete();
+			boolean actual = outputFile.delete();
 
 			assertThat(actual).isTrue();
 		}
@@ -129,19 +118,20 @@ class KmlWriterTest {
 		 */
 		@ParameterizedTest
 		@EnumSource(WriteType.class)
-		void test_IOException_fileLocked_messageContainsReason(WriteType plain) throws Exception {
+		void test_IOException_fileLocked_messageContainsReason(WriteType plain, @TempOutputFile File outputFile)
+				throws Exception {
 			logTestStart();
 
-			new File(fileName).createNewFile();
+			outputFile.createNewFile();
 
 			if (plain == WriteType.DISABLE_NAMESPACE_PREFIXES) {
 				writer.disableNamespacePrefixes();
 			}
 
-			try (FileChannel channel = FileChannel.open(Path.of(fileName), StandardOpenOption.APPEND)) {
+			try (FileChannel channel = FileChannel.open(outputFile.toPath(), StandardOpenOption.APPEND)) {
 				channel.lock();
 
-				IOException actual = assertThrows(IOException.class, () -> writer.write(kml, fileName));
+				IOException actual = assertThrows(IOException.class, () -> writer.write(kml, outputFile.toString()));
 
 				assertThat(actual).hasMessageContaining(
 						"The process cannot access the file because another process has locked a portion of the file");
@@ -153,7 +143,7 @@ class KmlWriterTest {
 		 */
 		@ParameterizedTest
 		@ValueSource(ints = { 1, 100000 })
-		void test_plain(int featureCount) throws Exception {
+		void test_plain(int featureCount, @TempOutputFile File outputFile) throws Exception {
 			logTestStart();
 
 			Document document = kml.createAndSetDocument();
@@ -162,10 +152,9 @@ class KmlWriterTest {
 				document.addToFeature(getRandomFeature());
 			}
 
-			File file = new File(fileName);
-			writer.disableNamespacePrefixes().write(kml, file.toString());
+			writer.disableNamespacePrefixes().write(kml, outputFile.toString());
 
-			String actual = Files.readString(Path.of(file.toString()), StandardCharsets.UTF_8);
+			String actual = Files.readString(outputFile.toPath(), StandardCharsets.UTF_8);
 
 			assertThat(actual).contains("xmlns=\"http://www.opengis.net/kml/2.2\"");
 
