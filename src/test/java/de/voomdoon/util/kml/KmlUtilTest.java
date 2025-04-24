@@ -19,7 +19,7 @@ import de.voomdoon.testing.file.WithTempOutputFiles;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * Test class for {@link KmlUtil}.
+ * Tests for {@link KmlUtil}.
  *
  * @author André Schulz
  *

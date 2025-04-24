@@ -21,7 +21,7 @@ import de.voomdoon.testing.file.WithTempInputFiles;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * Test class for {@link KmlReader}.
+ * Tests for {@link KmlReader}.
  *
  * @author André Schulz
  *
@@ -30,7 +30,7 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlReaderTest {
 
 	/**
-	 * Test class for {@link KmlReader#read(String)}.
+	 * Tests for {@link KmlReader#read(String)}.
 	 *
 	 * @author André Schulz
 	 *

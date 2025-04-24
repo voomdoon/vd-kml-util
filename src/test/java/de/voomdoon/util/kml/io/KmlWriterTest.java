@@ -28,7 +28,7 @@ import de.voomdoon.testing.file.TempOutputFile;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * Test class for {@link KmlWriter}.
+ * Tests for {@link KmlWriter}.
  *
  * @author André Schulz
  *
@@ -37,7 +37,7 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlWriterTest {
 
 	/**
-	 * Test class for {@link KmlWriter#write(Kml, String)}.
+	 * Tests for {@link KmlWriter#write(Kml, String)}.
 	 *
 	 * @author André Schulz
 	 *

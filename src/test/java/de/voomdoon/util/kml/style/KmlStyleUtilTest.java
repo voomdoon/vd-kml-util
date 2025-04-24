@@ -13,7 +13,7 @@ import de.micromata.opengis.kml.v_2_2_0.Style;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * Test class for {@link KmlStyleUtil}.
+ * Tests for {@link KmlStyleUtil}.
  *
  * @author André Schulz
  *
@@ -22,7 +22,7 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlStyleUtilTest {
 
 	/**
-	 * Test class for {@link KmlStyleUtil#setStyleUrl(Placemark, Style, Document)}.
+	 * Tests for {@link KmlStyleUtil#setStyleUrl(Placemark, Style, Document)}.
 	 *
 	 * @author André Schulz
 	 *
