@@ -1,6 +1,7 @@
 package de.voomdoon.util.kml.io;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -34,9 +35,8 @@ public class KmlWriter {
 		private IOException error;
 
 		/**
-		 * DOCME add JavaDoc for constructor MyWriter
-		 * 
 		 * @param wrapped
+		 *            {@link Writer}
 		 * @since 0.1.0
 		 */
 		public NormalWriter(Writer wrapped) {
@@ -144,6 +144,8 @@ public class KmlWriter {
 	}
 
 	/**
+	 * Writes {@link Kml} to a {@link File}.
+	 * 
 	 * @param kml
 	 *            {@link Kml} to write
 	 * @param fileName

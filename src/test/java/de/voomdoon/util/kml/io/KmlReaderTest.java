@@ -21,7 +21,7 @@ import de.voomdoon.testing.file.WithTempInputFiles;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * DOCME add JavaDoc for
+ * Test class for {@link KmlReader}.
  *
  * @author André Schulz
  *
@@ -30,7 +30,7 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlReaderTest {
 
 	/**
-	 * DOCME add JavaDoc for KmlReaderTest
+	 * Test class for {@link KmlReader#read(String)}.
 	 *
 	 * @author André Schulz
 	 *
@@ -57,8 +57,6 @@ class KmlReaderTest {
 		}
 
 		/**
-		 * @throws IOException
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test

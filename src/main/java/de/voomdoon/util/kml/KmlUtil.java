@@ -1,5 +1,6 @@
 package de.voomdoon.util.kml;
 
+import java.io.File;
 import java.io.IOException;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
@@ -8,7 +9,7 @@ import de.voomdoon.util.kml.io.KmlWriter;
 import lombok.experimental.UtilityClass;
 
 /**
- * DOCME add JavaDoc for
+ * Utility for {@link Kml}.
  *
  * @author André Schulz
  *
@@ -18,10 +19,11 @@ import lombok.experimental.UtilityClass;
 public class KmlUtil {
 
 	/**
-	 * DOCME add JavaDoc for method readKml
+	 * Reads {@link Kml} from {@link File}.
 	 * 
 	 * @param fileName
-	 * @return
+	 *            name of the {@link File} to read from
+	 * @return {@link Kml}
 	 * @throws IOException
 	 * @since 0.1.0
 	 */
@@ -30,10 +32,12 @@ public class KmlUtil {
 	}
 
 	/**
-	 * DOCME add JavaDoc for method writeKml
+	 * Writes {@link Kml} to a {@link File}.
 	 * 
 	 * @param kml
+	 *            {@link Kml} to write
 	 * @param fileName
+	 *            file name to write to
 	 * @throws IOException
 	 * @since 0.1.0
 	 */

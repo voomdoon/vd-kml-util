@@ -25,7 +25,7 @@ public class LineStringCleaner {
 	private double epsilon = 1E-9;
 
 	/**
-	 * DOCME add JavaDoc for method removeDuplicateCoorinates
+	 * Removes redundant coordinates from {@link LineString}.
 	 * 
 	 * @param lineString
 	 *            {@link LineString}
@@ -57,11 +57,11 @@ public class LineStringCleaner {
 	}
 
 	/**
-	 * DOCME add JavaDoc for method isEqual
-	 * 
 	 * @param last
+	 *            {@link Coordinate}
 	 * @param curr
-	 * @return
+	 *            {@link Coordinate}
+	 * @return {@code trus} if equal, {@code false} otherwise
 	 * @since 0.1.0
 	 */
 	private boolean isEqual(Coordinate last, Coordinate curr) {

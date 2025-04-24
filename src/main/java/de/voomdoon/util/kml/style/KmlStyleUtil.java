@@ -7,7 +7,7 @@ import de.micromata.opengis.kml.v_2_2_0.StyleSelector;
 import lombok.experimental.UtilityClass;
 
 /**
- * DOCME add JavaDoc for
+ * Utility for {@link Style}.
  *
  * @author André Schulz
  *
@@ -17,11 +17,14 @@ import lombok.experimental.UtilityClass;
 public class KmlStyleUtil {
 
 	/**
-	 * DOCME add JavaDoc for method setStyle
+	 * Sets {@link Placemark#setStyleUrl(String)} and ensures the {@link Style} is added to the {@link Document}.
 	 * 
 	 * @param placemark
+	 *            {@link Placemark}
 	 * @param style
+	 *            {@link Style}
 	 * @param document
+	 *            {@link Document}
 	 * @since 0.1.0
 	 */
 	public static void setStyleUrl(Placemark placemark, Style style, Document document) {

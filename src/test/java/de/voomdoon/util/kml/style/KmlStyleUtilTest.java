@@ -13,7 +13,7 @@ import de.micromata.opengis.kml.v_2_2_0.Style;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * DOCME add JavaDoc for
+ * Test class for {@link KmlStyleUtil}.
  *
  * @author André Schulz
  *
@@ -22,7 +22,7 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlStyleUtilTest {
 
 	/**
-	 * DOCME add JavaDoc for KmlStyleUtilTest
+	 * Test class for {@link KmlStyleUtil#setStyleUrl(Placemark, Style, Document)}.
 	 *
 	 * @author André Schulz
 	 *
@@ -32,8 +32,6 @@ class KmlStyleUtilTest {
 	class SetStyleUrlTest extends LoggingCheckingTestBase {
 
 		/**
-		 * DOCME add JavaDoc for method test_error_equalIdButDifferent
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test
@@ -58,8 +56,6 @@ class KmlStyleUtilTest {
 		}
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test
@@ -77,8 +73,6 @@ class KmlStyleUtilTest {
 		}
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test
@@ -96,8 +90,6 @@ class KmlStyleUtilTest {
 		}
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test
@@ -117,8 +109,6 @@ class KmlStyleUtilTest {
 		}
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test

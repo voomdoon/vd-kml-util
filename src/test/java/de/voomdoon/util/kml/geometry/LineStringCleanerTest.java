@@ -10,7 +10,7 @@ import de.micromata.opengis.kml.v_2_2_0.LineString;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * DOCME add JavaDoc for
+ * Test class for {@link LineStringCleaner}.
  *
  * @author André Schulz
  *

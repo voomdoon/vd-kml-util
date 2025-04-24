@@ -19,7 +19,7 @@ import de.voomdoon.testing.file.WithTempOutputFiles;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * DOCME add JavaDoc for
+ * Test class for {@link KmlUtil}.
  *
  * @author André Schulz
  *
@@ -31,8 +31,6 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlUtilTest extends LoggingCheckingTestBase {
 
 	/**
-	 * @throws IOException
-	 * 
 	 * @since 0.1.0
 	 */
 	@Test
@@ -47,8 +45,6 @@ class KmlUtilTest extends LoggingCheckingTestBase {
 	}
 
 	/**
-	 * DOCME add JavaDoc for method test
-	 * 
 	 * @since 0.1.0
 	 */
 	@Test

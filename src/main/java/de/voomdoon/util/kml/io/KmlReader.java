@@ -7,7 +7,7 @@ import java.io.IOException;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 
 /**
- * DOCME add JavaDoc for
+ * Reads {@link Kml} from {@link File}.
  *
  * @author André Schulz
  *
@@ -16,10 +16,11 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
 public class KmlReader {
 
 	/**
-	 * DOCME add JavaDoc for method read
+	 * Reads {@link Kml} from {@link File}.
 	 * 
 	 * @param fileName
-	 * @return
+	 *            name of the {@link File} to read from
+	 * @return {@link Kml}
 	 * @throws IOException
 	 * @since 0.1.0
 	 */

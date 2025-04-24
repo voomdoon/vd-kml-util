@@ -28,7 +28,7 @@ import de.voomdoon.testing.file.TempOutputFile;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * DOCME add JavaDoc for
+ * Test class for {@link KmlWriter}.
  *
  * @author André Schulz
  *
@@ -37,7 +37,7 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class KmlWriterTest {
 
 	/**
-	 * DOCME add JavaDoc for KmlWriterTest
+	 * Test class for {@link KmlWriter#write(Kml, String)}.
 	 *
 	 * @author André Schulz
 	 *

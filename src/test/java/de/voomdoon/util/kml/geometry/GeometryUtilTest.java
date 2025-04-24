@@ -12,7 +12,7 @@ import de.micromata.opengis.kml.v_2_2_0.MultiGeometry;
 import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 
 /**
- * DOCME add JavaDoc for
+ * Test class for {@link GeometryUtil}.
  *
  * @author André Schulz
  *
@@ -21,18 +21,16 @@ import de.voomdoon.testing.logging.tests.LoggingCheckingTestBase;
 class GeometryUtilTest {
 
 	/**
-	 * DOCME add JavaDoc for GeometryUtilTest
+	 * Test class for {@link GeometryUtil#concatenateLineStrings(MultiGeometry)}.
 	 *
 	 * @author André Schulz
 	 *
 	 * @since 0.1.0
 	 */
 	@Nested
-	class concatenateLineStringsTest extends LoggingCheckingTestBase {
+	class ConcatenateLineStringsTest extends LoggingCheckingTestBase {
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test
@@ -53,8 +51,6 @@ class GeometryUtilTest {
 		}
 
 		/**
-		 * DOCME add JavaDoc for method test
-		 * 
 		 * @since 0.1.0
 		 */
 		@Test

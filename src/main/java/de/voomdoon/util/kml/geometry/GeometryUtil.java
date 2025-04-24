@@ -6,7 +6,7 @@ import de.micromata.opengis.kml.v_2_2_0.MultiGeometry;
 import lombok.experimental.UtilityClass;
 
 /**
- * DOCME add JavaDoc for
+ * Utility for {@link Geometry}.
  *
  * @author André Schulz
  *
@@ -16,10 +16,11 @@ import lombok.experimental.UtilityClass;
 public class GeometryUtil {
 
 	/**
-	 * DOCME add JavaDoc for method createLineString
+	 * Concatenates all {@link LineString} of a {@link MultiGeometry} into a single {@link LineString}.
 	 * 
 	 * @param multiGeometry
-	 * @return
+	 *            {@link MultiGeometry} with {@link LineString}
+	 * @return {@link LineString}
 	 * @since 0.1.0
 	 */
 	public static LineString concatenateLineStrings(MultiGeometry multiGeometry) {
