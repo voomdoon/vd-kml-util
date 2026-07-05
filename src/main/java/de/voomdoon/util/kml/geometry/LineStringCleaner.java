@@ -15,6 +15,12 @@ import de.micromata.opengis.kml.v_2_2_0.LineString;
 public class LineStringCleaner {
 
 	/**
+	 * Creates a line string cleaner.
+	 */
+	public LineStringCleaner() {
+	}
+
+	/**
 	 * @since 0.1.0
 	 */
 	private double altitudeThreshold;
@@ -48,6 +54,8 @@ public class LineStringCleaner {
 	}
 
 	/**
+	 * Sets the maximum altitude difference for redundant coordinates.
+	 *
 	 * @param altitudeThreshold
 	 *            altitudeThreshold
 	 * @since 0.1.0

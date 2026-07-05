@@ -18,6 +18,12 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
 public class KmlWriter {
 
 	/**
+	 * Creates a KML writer.
+	 */
+	public KmlWriter() {
+	}
+
+	/**
 	 * @author André Schulz
 	 *
 	 * @since 0.1.0
@@ -149,8 +155,9 @@ public class KmlWriter {
 	 * @param kml
 	 *            {@link Kml} to write
 	 * @param fileName
-	 *            file name to write to
+	 *            file name as {@link String}
 	 * @throws IOException
+	 *             if the {@link File} cannot be written
 	 * @since 0.1.0
 	 */
 	public void write(Kml kml, String fileName) throws IOException {
