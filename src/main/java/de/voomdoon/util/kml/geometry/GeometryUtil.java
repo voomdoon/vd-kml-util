@@ -3,7 +3,6 @@ package de.voomdoon.util.kml.geometry;
 import de.micromata.opengis.kml.v_2_2_0.Geometry;
 import de.micromata.opengis.kml.v_2_2_0.LineString;
 import de.micromata.opengis.kml.v_2_2_0.MultiGeometry;
-import lombok.experimental.UtilityClass;
 
 /**
  * Utility for {@link Geometry}.
@@ -12,8 +11,13 @@ import lombok.experimental.UtilityClass;
  *
  * @since 0.1.0
  */
-@UtilityClass
-public class GeometryUtil {
+public final class GeometryUtil {
+
+	/**
+	 * Prevents instantiation.
+	 */
+	private GeometryUtil() {
+	}
 
 	/**
 	 * Concatenates all {@link LineString} of a {@link MultiGeometry} into a single {@link LineString}.

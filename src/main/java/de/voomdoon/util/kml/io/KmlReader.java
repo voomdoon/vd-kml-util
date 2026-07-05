@@ -16,12 +16,19 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
 public class KmlReader {
 
 	/**
+	 * Creates a KML reader.
+	 */
+	public KmlReader() {
+	}
+
+	/**
 	 * Reads {@link Kml} from {@link File}.
 	 * 
 	 * @param fileName
 	 *            name of the {@link File} to read from
 	 * @return {@link Kml}
 	 * @throws IOException
+	 *             if the {@link File} cannot be read
 	 * @since 0.1.0
 	 */
 	public Kml read(String fileName) throws IOException {

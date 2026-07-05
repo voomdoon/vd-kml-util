@@ -4,7 +4,6 @@ import de.micromata.opengis.kml.v_2_2_0.Document;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Style;
 import de.micromata.opengis.kml.v_2_2_0.StyleSelector;
-import lombok.experimental.UtilityClass;
 
 /**
  * Utility for {@link Style}.
@@ -13,8 +12,13 @@ import lombok.experimental.UtilityClass;
  *
  * @since 0.1.0
  */
-@UtilityClass
-public class KmlStyleUtil {
+public final class KmlStyleUtil {
+
+	/**
+	 * Prevents instantiation.
+	 */
+	private KmlStyleUtil() {
+	}
 
 	/**
 	 * Sets {@link Placemark#setStyleUrl(String)} and ensures the {@link Style} is added to the {@link Document}.
